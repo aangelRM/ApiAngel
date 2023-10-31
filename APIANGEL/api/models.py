@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import make_password, check_password
 
 # Tabla "conoce_servicios_emergencia"
 class ConoceServiciosEmergencia(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_CSEmergencia = models.AutoField(primary_key=True)
     opcion_cse = models.CharField(max_length=255)
 
     def __str__(self):
@@ -11,7 +11,7 @@ class ConoceServiciosEmergencia(models.Model):
 
 # Tabla "conoce_numeros_emergencia"
 class ConoceNumerosEmergencia(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_CNEmergencia = models.AutoField(primary_key=True)
     opcion_cne = models.CharField(max_length=255)
 
     def __str__(self):
@@ -19,7 +19,7 @@ class ConoceNumerosEmergencia(models.Model):
 
 # Tabla "uso_911"
 class Uso911(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_Uso911 = models.AutoField(primary_key=True)
     opcion_uso911 = models.CharField(max_length=255)
 
     def __str__(self):
@@ -27,7 +27,7 @@ class Uso911(models.Model):
 
 # Tabla "rapidez_servicio"
 class RapidezServicio(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_RServicio = models.AutoField(primary_key=True)
     opcion_rapidez = models.CharField(max_length=255)
 
     def __str__(self):
@@ -35,7 +35,7 @@ class RapidezServicio(models.Model):
 
 # Tabla "usar_app_emergencia"
 class UsarAppEmergencia(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_UApp = models.AutoField(primary_key=True)
     opcion_usarapp = models.CharField(max_length=255)
 
     def __str__(self):
@@ -43,7 +43,7 @@ class UsarAppEmergencia(models.Model):
 
 # Tabla "avisos_recomendaciones"
 class AvisosRecomendaciones(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_AyR = models.AutoField(primary_key=True)
     opcion_avisos = models.CharField(max_length=255)
 
     def __str__(self):
@@ -51,7 +51,7 @@ class AvisosRecomendaciones(models.Model):
 
 # Tabla "mapa_interactivo"
 class MapaInteractivo(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_MapaInteractivo = models.AutoField(primary_key=True)
     opcion_mapa = models.CharField(max_length=255)
 
     def __str__(self):
@@ -59,7 +59,22 @@ class MapaInteractivo(models.Model):
 
 # Tabla "paleta_colores"
 class PaletaColores(models.Model):
-    id = models.AutoField(primary_key=True)
+    id_PColores = models.AutoField(primary_key=True)
+    opcion_paleta = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"Encuesta de servicios de emergencia: {self.pk}"
+    
+# Tabla "General"
+class Formulario(models.Model):
+    id_ResPersona = models.AutoField(primary_key=True)
+    opcion_cse = models.CharField(max_length=255)
+    opcion_cne = models.CharField(max_length=255)
+    opcion_uso911 = models.CharField(max_length=255)
+    opcion_rapidez = models.IntegerField()
+    opcion_usarapp = models.CharField(max_length=255)
+    opcion_avisos = models.CharField(max_length=255)
+    opcion_mapa = models.CharField(max_length=255)
     opcion_paleta = models.CharField(max_length=255)
 
     def __str__(self):
