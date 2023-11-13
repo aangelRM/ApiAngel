@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+import googlemaps
+from django.conf import settings
 from rest_framework.views import APIView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -151,3 +153,15 @@ class Widgets(APIView):
 
 
 
+def tu_vista(request):
+    # Configurar el cliente de Google Maps con tu clave de API
+    gmaps = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
+
+    # Hacer una solicitud de geocodificación
+    result = gmaps.geocode('Direccion a geolocalizar')
+
+    # Obtener la latitud y longitud del resultado
+    latitud = result[0]['geometry']['location']['lat']
+    longitud = result[0]['geometry']['location']['lng']
+
+    return render(request, 'tu_template.html', {'latitud': latitud, 'longitud': longitud})

@@ -175,28 +175,12 @@
 
 
 
-    <div id="map" style="height: 400px; width: 100%;"></div>
-    <script>
-        function initMap() {
-            var myLatLng = {lat: {{ latitud }}, lng: {{ longitud }}};
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: myLatLng,
-                zoom: 15
-            });
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: 'Ubicación'
-            });
-        }
-        google.maps.event.addDomListener(window, 'load', initMap);
-    </script>
+    
+    
+    
+    
 
-
-
-
-
-
+    
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -225,7 +209,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+            with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -863,7 +847,7 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-
+  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -883,7 +867,29 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    
 
+
+    <div id="map" style="height: 400px; width: 100%;"></div>
+    <script>
+        function initMap() {
+            var myLatLng = {lat: {{ latitud }}, lng: {{ longitud }}};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: myLatLng,
+                zoom: 15
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Ubicación'
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
+
+
+    
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">

@@ -56,7 +56,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'APIANGEL.urls'
-GOOGLE_MAPS_API_KEY = 'AIzaSyCpndRG8hcPLpCUGqWqkAuXI6B0CsJCsb4'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -73,6 +72,7 @@ TEMPLATES = [
     },
 ]
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyCpndRG8hcPLpCUGqWqkAuXI6B0CsJCsb4'
 
 WSGI_APPLICATION = 'APIANGEL.wsgi.application'
 
@@ -80,23 +80,23 @@ WSGI_APPLICATION = 'APIANGEL.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'PORT': 5432,
-        'NAME': 'NSOS_mexico',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'HOST': 'localhost',
+#         'PORT': 5432,
+#         'NAME': 'NSOS_mexico',
+#         'USER': 'postgres',
+#         'PASSWORD': '12345',
+#     }
+# }
 
 
 
