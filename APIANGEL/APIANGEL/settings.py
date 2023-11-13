@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'APIANGEL.urls'
-
+GOOGLE_MAPS_API_KEY = 'AIzaSyCpndRG8hcPLpCUGqWqkAuXI6B0CsJCsb4'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
