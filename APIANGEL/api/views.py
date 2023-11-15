@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-import googlemaps
+from django.views import View
+from django.views.generic import View
 from django.conf import settings
 from rest_framework.views import APIView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -8,14 +9,64 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.http import HttpResponse
-from django.http import HttpRequest
+from django.http import HttpResponse , HttpRequest
 from .forms import UsuarioForm
 from .models import *
 from django.contrib.auth.decorators import login_required
-from django.views import View
 from django.contrib.auth.hashers import check_password
 from smtplib import SMTPException
+
+
+# apis
+import googlemaps
+import requests
+
+def tu_vista(request):
+    api_key = settings.GOOGLE_MAPS_API_KEY
+    return render(request, 'mapa.html', {'api_key': api_key})
+
+def vista_tiempo(request):
+    return render(request, 'clima.html')
+
+# En views.py
+def obtener_terremotos_mexico():
+    url = 'https://earthquake.usgs.gov/fdsnws/event/1/query'
+    parametros = {
+        'format': 'geojson',
+        'starttime': '2023-01-01',
+        'minmagnitude': 4.0,
+        'maxlatitude': 32.718,
+        'minlatitude': 14.532,
+        'maxlongitude': -86.593,
+        'minlongitude': -118.276,
+        'limit': 10
+    }
+
+    respuesta = requests.get(url, params=parametros)
+
+    if respuesta.status_code == 200:
+        datos_terremotos = respuesta.json()
+        return datos_terremotos['features']  # Devolver solo la lista de terremotos
+    else:
+        print(f"Error al obtener datos. Código de estado: {respuesta.status_code}")
+        return None
+
+def vista_terremotos(request):
+    terremotos = obtener_terremotos_mexico()
+
+    if terremotos is not None:
+        return render(request, 'terremotos.html', {'terremotos': terremotos})
+    else:
+        return render(request, 'terremotos.html', {'terremotos': []})  # Maneja el caso de error
+
+
+
+
+
+
+
+
+
 
 class Login(View):
     template_name = "login.html"
@@ -126,6 +177,9 @@ class FormularioUsuarioView(HttpRequest):
 class Main(APIView):
     template_name = "index.html"
     def get(self, request):
+        context={
+            
+        }
         return render(request, self.template_name)
     
 class Home1(APIView):
@@ -149,19 +203,3 @@ class Widgets(APIView):
     def get(self, request):
         return render(request, self.template_name)
 
-
-
-
-
-def tu_vista(request):
-    # Configurar el cliente de Google Maps con tu clave de API
-    gmaps = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
-
-    # Hacer una solicitud de geocodificación
-    result = gmaps.geocode('Direccion a geolocalizar')
-
-    # Obtener la latitud y longitud del resultado
-    latitud = result[0]['geometry']['location']['lat']
-    longitud = result[0]['geometry']['location']['lng']
-
-    return render(request, 'tu_template.html', {'latitud': latitud, 'longitud': longitud})
