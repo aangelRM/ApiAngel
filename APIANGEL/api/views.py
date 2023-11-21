@@ -34,7 +34,7 @@ def obtener_terremotos_mexico():
     parametros = {
         'format': 'geojson',
         'starttime': '2023-01-01',
-        'minmagnitude': 4.0,
+        'minmagnitude': 5.0,
         'maxlatitude': 32.718,
         'minlatitude': 14.532,
         'maxlongitude': -86.593,

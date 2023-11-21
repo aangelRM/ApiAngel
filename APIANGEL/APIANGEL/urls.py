@@ -1,4 +1,5 @@
 from django.conf.urls.static import static
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from api.views import *
@@ -19,10 +20,5 @@ urlpatterns = [
     path('clima/', views.vista_tiempo, name='vista_tiempo'),
     path('terremotos/', views.vista_terremotos, name='terremotos'),
     path('mapa/', views.tu_vista, name='vista_mapa'),
-
-    
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
